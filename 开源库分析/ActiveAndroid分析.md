@@ -1,0 +1,48 @@
+###ActiveAndroid详解
+
+> 类
+
+- TableInfo:表信息
+	- Class<? extends Model> mType:表的类型
+	- String mTableName:表名
+	- String mIdName:表的默认的id字段名
+	- Map<Field,String> mColumns:存储表中所有的字段
+	- TableInfo(Class<? extends Model> type):设置tableName和所有属性的名字
+	- getType():获取表的类型
+	- getTableName():获取表的名字
+	- getIdName():获取id属性名
+	- getFields()
+	- getColumnName(Field field)
+- Configuration:获取配置信息
+	- String mDataBaseName:数据库名字
+	- int mDatabaseVersion:数据库版本号
+	- String mSqlParser
+	- List<Class<? extends Model>> mModelClasses:继承自Model的class的集合
+	- List<Class<? extends TypeSerializer>> mTypeSerializers:序列化类型的集合
+	- Builder:内部类
+		- String AA_DB_NAME:数据库名字
+		- String AA_DB_VERSION:数据库版本号
+		- String AA_MODELS
+		- String AA_SERIALIZERS
+		- String AA_SQL_PARSER
+		- int DEFAULT_CACHE_SIZE:默认缓存大小
+		- String DEFAULT_DB_NAME:默认数据库名字
+		- String DEFAULT_SQL_PARSER
+		- Builder setCacheSize(int cacheSize):设置缓存大小
+		- Builder setDatabaseName(String databaseName):设置数据库名字
+		- Builder setDatabaseVersion(int databaseVersion):设置数据库版本号
+		- Builder setSqlParser(String sqlParser)
+		- Builder addModelClass(Class<? extends Model> modelClass):添加Model的子类
+		- Builder addModelClasses(Class<? extends Model>... modelClasses):批量添加Model的子类
+		- setModelClasses(Class<? extends Model>... modelClasses)
+		- addTypeSerializers(Class<? extends TypeSerializer>... typeSerializers)
+		- setTypeSerializers(Class<? extends TypeSerializer>... typeSerializers)
+		- Configuration create():创建Configuration
+		- String getMetaDataDatabaseNameOrDefault():从meta配置中获取数据库名字
+		- int getMetaDataDatabaseVersionOrDefault():从meta配置中获取数据库版本号
+		- String getMetaDataSqlParserOrDefault()
+		- List<Class<? extends Model>> loadModelList(String[] models):判断models中的每一个是否是Model的子类，如果是就添加到modelClasses集合中
+		- List<Class<? extends TypeSerializer>> loadSerializerList(String[] serializers)
+- ReflectionUtils:工具类
+	- boolean isModel(Class<?> type):是否是Model的子类
+	- boolean isTypeSerializer(Class<?> type):是否是TypeSerializer的子类

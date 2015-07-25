@@ -1,0 +1,13 @@
+###使用RetroLamabda表达式
+
+- 第一步：在./build.gradle文件中添加如下操作
+
+![图1](https://medium2.global.ssl.fastly.net/max/800/1*8won0rqq5VN5FLt7w7r7Og.png)
+
+- 第二步：在app/build.gradle文件中添加如下操作
+
+![图2](https://medium2.global.ssl.fastly.net/max/800/1*HDqEm1d6kAa1JCdi6xMNiw.png)
+
+- 第三步：在app/build.gradle文件中继续添加如下操作
+
+![图3](https://medium2.global.ssl.fastly.net/max/800/1*QVOHpHlj0UTszCzPP9C5zw.png)
