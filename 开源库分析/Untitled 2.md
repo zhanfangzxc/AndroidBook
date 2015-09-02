@@ -1,52 +1,31 @@
-###Android Studio快捷键整理
+###ExpandableRecyclerView
 
-- CMD+O 打开类
-- CMD+SHIFT+O 打开文件
-- ALT+SHIFT+N 打开Symbol
-- CMD+O:行号 打开类并跳到指定行
-- CMD+U 跳到父类
-- CMD+E 最近打开
-- CMD+SHIFT+E 最近编辑
-- CMD+ALT+LEFT/RIGHT 前进或后退
-- CMD+SHIFT+BACKSPACE 最后编辑的位置
-- ALT+F7 /CMD+ALT+F7 显示使用地方
-- CMD+B 跳到声明
-- CMD+ALT+B 跳到实现
-- CMD+SHIFT+B 跳到类型声明
-- CMD+F12 弹出文件结构
-- CTRL+ALT+H 弹出调用层级
-- ALT+SPACE 快速查找定义
-- ALT+'+'/'-' 快速伸缩代码块
-- F3 开关书签
-- CMD+F3 快速显示书签
-- CMD+SHIFT+A 查找action
-- ALT+SHIFT+UP/DOWN 上下移动当前行
-- CMD+BACKSPACE 删除当前行
-- CMD+D 复制行
-- ALT+UP/DOWN 扩大/收缩选中部分
-- CMD+ALT+T 包裹代码快
-- CMD+J 在线模板
-- CMD+ALT+UP/DOWN 移动方法
-- CMD+SHIFT+ENTER 完成statement
-- CMD+SHIFT+J 合并行和文字
-- ALT+F1 选择于
-- CMD+SHIFT+DELETE 打开/删除
-- CMD+F12 停止进程
-- ALT+F10 显示执行点
-- CTRL+V 打开vcs
-- vcs->git->compare with branch 和分支比较
-- ESCAPE 返回到编辑界面
-- SHIFT+ESCAPE 返回到编辑界面并关闭面板
-- F12 跳转到最近使用的工具窗口
-- CMD+SHIFT+F12 隐藏所有面板
-- CMD+数字 打开面板
-- CMD+SHIFT+A->analyze data flow ti here 查看当前变量，参数，字段的调用路径
-- CTRL+G 可以同时选中多行的相同内容
-- ALT+鼠标拖动 可以选择列
-- CMD+SHIFT+8 列选择
-- .for 用于foreach
-- .format 用于String format()
-- .cast 强制转换
-- 鼠标右键-> compare with cliboard 和剪切板的内同比较
-- CMD+P 查看参数信息
-- CTRL+TAB 切换器
+> 重要的类
+
+- ExpandableRecyclerAdapterHelper
+
+```
+List<Object> mHelperItemList;
+
+public List<Object> generateHelperItemList(List<Object> itemList){
+	ArrayList<Object> parentWrapperList = new ArrayList<>();
+	for(int i = 0;i<itemList.size();i++){
+		if (itemList.get(i) instanceof ParentObject) {
+                ParentWrapper parentWrapper = new ParentWrapper(itemList.get(i), sCurrentId);
+                sCurrentId++;
+                parentWrapperList.add(parentWrapper);
+            } else {
+                parentWrapperList.add(itemList.get(i));
+            }
+        }
+	}
+	return parentWrapperList;
+}
+```
+- ParentWrapper
+
+```
+boolean mIsExpanded:是否展开
+long mStableId:id
+Object mParentObject:parent实体
+```

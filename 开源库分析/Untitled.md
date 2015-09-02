@@ -1,59 +1,35 @@
-###问题收集
+###SharedPreferences分析
 
-> 监听软键盘的弹出和隐藏
-
-- 前提：为Activity配置如下属性
+> 使用
 
 ```
-android:windowSoftInputMode="adjustResize"
-```
+SharedPreferences sharedPreferencesContext;
+SharedPreferences sharedPreferences;
 
-- 创建自定义的RootView
+sharedPreferencesContext = getSharedPreferences("test",MODE_PRIVATE);
+sharedPreferences = getPreferences(MODE_PRIVATE);
+
+SharedPreferences.Editor editor = sharedPreferencesContext.edit();
+editor.putBoolean("saved",true);
+Set<String> set = new HashSet<>();
+set.add("aaaaa");
+set.add("bbbbbbb");
+editor.putStringSet("content",set);
+editor.commit();
+
+sharedPreferences.Editor editorActivity = sharedPreferences.edit();
+editorActivity/putString("name","haha");
+editorActivity.commit();
 
 ```
-public class ResizeView extends LinearView{
-	private OnResizeListener listener;
+> 分析
+
+```
+|--实现类:SharedPreferencesImpl
+
+|--Context
+	|--getSharedPreferences(String name,int mode)
 	
-	public ResizeView(Context context,Attributes attrs){
-		super(context,attrs);
-	}
-	
-	public interface OnResizeView{
-		void OnResize(int w, int h, int oldw, int oldh);
-	}
-	
-	@Override
-	protected void onSizeChanged(int w, int h, int oldw, int oldh){
-		if(listener != null){
-			listener.OnResize(w,h,oldw,oldh);
-		}
-	}
-	
-	public void setOnResizeListener(OnResizeListener l){
-		listener = l;
-	}
-}
-
-ResizeView rootView = (ResizeView)findViewById(R.id.root_view);
-
-rootView.setOnResizeListener（new OnResizeListener{
-	@Override
-	public void OnResize(int w, int h, int oldw, int oldh){
-		if(h < oldh){
-			//TODO 软键盘弹出的状态
-		}
-	}
-});
-```
-
-> 使Listview显示最后一条的方法
-
-```
-listView.clearFocus();
-listView.post(new Runnable(){
-	@Override
-	public void run(){
-		listView.setSelection(int position);
-	}
-});
+|--Activity
+	|--getPreferences(int mode):以activity的名字为文件名
 ```
